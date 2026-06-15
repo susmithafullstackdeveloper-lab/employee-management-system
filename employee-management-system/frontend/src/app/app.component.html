@@ -1,0 +1,47 @@
+<div class="container mt-4">
+  <h2 class="text-center mb-4">Employee Management System</h2>
+
+  <div class="card p-3 mb-4">
+    <h5>{{ editId ? 'Update Employee' : 'Add Employee' }}</h5>
+    <form (ngSubmit)="saveEmployee()">
+      <div class="row g-2">
+        <div class="col-md-4"><input class="form-control" placeholder="Name" [(ngModel)]="employee.name" name="name" required></div>
+        <div class="col-md-4"><input class="form-control" placeholder="Email" [(ngModel)]="employee.email" name="email" required></div>
+        <div class="col-md-4"><input class="form-control" placeholder="Department" [(ngModel)]="employee.department" name="department" required></div>
+        <div class="col-md-4"><input class="form-control" placeholder="Designation" [(ngModel)]="employee.designation" name="designation" required></div>
+        <div class="col-md-4"><input class="form-control" type="number" placeholder="Salary" [(ngModel)]="employee.salary" name="salary" required></div>
+        <div class="col-md-4">
+          <button class="btn btn-primary me-2" type="submit">{{ editId ? 'Update' : 'Save' }}</button>
+          <button class="btn btn-secondary" type="button" (click)="resetForm()">Clear</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="input-group mb-3">
+    <input class="form-control" placeholder="Search by name" [(ngModel)]="searchText">
+    <button class="btn btn-outline-primary" (click)="searchEmployee()">Search</button>
+  </div>
+
+  <table class="table table-bordered table-striped bg-white">
+    <thead>
+      <tr>
+        <th>ID</th><th>Name</th><th>Email</th><th>Department</th><th>Designation</th><th>Salary</th><th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let emp of employees">
+        <td>{{ emp.id }}</td>
+        <td>{{ emp.name }}</td>
+        <td>{{ emp.email }}</td>
+        <td>{{ emp.department }}</td>
+        <td>{{ emp.designation }}</td>
+        <td>{{ emp.salary }}</td>
+        <td>
+          <button class="btn btn-sm btn-warning me-2" (click)="editEmployee(emp)">Edit</button>
+          <button class="btn btn-sm btn-danger" (click)="deleteEmployee(emp.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
